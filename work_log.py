@@ -83,7 +83,7 @@ def new_entry():
             
 
 def delete_entry():
-    # Removes entry
+    # Deletes entry
     edited = []
     with open('tasks.csv') as taskfile:
         reader = csv.DictReader(taskfile)
@@ -97,7 +97,7 @@ def delete_entry():
         writer = csv.DictWriter(taskfile, fieldnames=fieldnames)
         writer.writeheader()
         for row in edited:
-            writer.writerow({'name': row['name'], 'time': row['time'], 'notes': row['notes'], 'date': row['date']})
+            writer.writerow({'name': row['name'], 'date': row['date'], 'time': row['time'], 'notes': row['notes']})
     print("\nEntry deleted!\n")
        
 
@@ -262,19 +262,4 @@ def regex_search():
 
 if __name__ == "__main__":
     work_log()
-    
-
-
-    
-    
-      
-
-
-
-
-
-    
-
-
-
-
+ 
