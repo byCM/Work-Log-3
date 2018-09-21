@@ -53,7 +53,7 @@ def new_entry():
     if notes.isspace():
         notes = None
                      
-    with open('tasks.csv', 'w', newline='') as taskfile:
+    with open('tasks.csv', 'a', newline='') as taskfile:
         fieldnames = ['name', 'date', 'time', 'notes']
         writer = csv.DictWriter(taskfile, fieldnames=fieldnames)
         
@@ -109,7 +109,8 @@ def search_entries():
     b) Search by Range of Dates
     c) Exact Search
     d) Search by Regex Pattern
-    e) Return to menu    
+    e) Search by Time
+    f) Return to Menu   
 """)
     
     
@@ -126,7 +127,9 @@ def search_entries():
     elif search_mode == "d":
         regex_search()
     elif search_mode == "e":
-        sys.exit(0)
+        time_search()
+    elif search_mode == "f":
+        sys.exit()
     else:
         print("Please enter a, b, c, d or e.")
     
@@ -170,6 +173,7 @@ def search_range():
     search_mode = None
     while not search_mode:
         search_mode = input('Enter 1 to search a single date or 2 to search within a range of dates.\n>>>').strip()
+        clear_screen()
         if search_mode not in ['1', '2']:
             print('Not a valid selection')
             search_mode = None
@@ -205,7 +209,7 @@ def search_range():
         print('\nNo results found.\n')
         search_entries()
     else:
-        display_results(search_results)     
+        print(search_results)     
 
 
 def exact_search():
@@ -228,7 +232,7 @@ def exact_search():
         print("That keyword was not found")
         search_entries()
     else:
-        display_results(search_results)
+        print(search_results)
         
                     
 
@@ -256,7 +260,31 @@ def regex_search():
         print("\nNo results found!")
         search_entries()
     else:
-        display_results(search_results)
+        print(search_results)
+        
+def time_search():
+    time_results = None
+    search_results = []
+    print("Enter the time that you would like to search for in minutes")
+    while time_results is None:
+        time_results = input('>>>')
+        try:
+            time_results = int(time_results)
+        except ValueError:
+            print("Please enter a valid number")
+            time_results = None
+        else:
+            time_results = str(time_results)
+    with open('tasks.csv') as taskfile:
+        reader = csv.DictReader(taskfile)
+        for row in reader:
+            if row['time'] == time_results:
+                search_results.append(row)
+        if len(search_results) == 0:
+            print("No results found")
+            search_entries()
+        else:
+            print(search_results)
 
 
 
