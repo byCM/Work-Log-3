@@ -105,12 +105,11 @@ def search_entries():
     # Search option menu
     print("""
     What would you like to search by?
-    a) Search by Exact Date
-    b) Search by Range of Dates
-    c) Exact Search
-    d) Search by Regex Pattern
-    e) Search by Time
-    f) Return to Menu   
+    a) Search by Range of Dates or a Single Date
+    b) Exact Search
+    c) Search by Regex Pattern
+    d) Search by Time
+    e) Return to Menu   
 """)
     
     
@@ -119,16 +118,14 @@ def search_entries():
         search_mode = input('>>>').strip()
     clear_screen()
     if search_mode == "a":
-        search_date()
-    elif search_mode == "b":
         search_range()
-    elif search_mode == "c":
+    elif search_mode == "b":
         exact_search()
-    elif search_mode == "d":
+    elif search_mode == "c":
         regex_search()
-    elif search_mode == "e":
+    elif search_mode == "d":
         time_search()
-    elif search_mode == "f":
+    elif search_mode == "e":
         sys.exit()
     else:
         print("Please enter a, b, c, d or e.")
@@ -147,23 +144,6 @@ def input_date(date):
             print('That is not the correct format, format must be in MM/DD/YYYY. Please try again.')
 
             
-def search_date(): 
-     # Allows users to search by exact date. They can also search by a single date in the search range function
-    search_mode = input("Enter the date that you would like to search for in MM/DD/YY format: ")
-    with open('tasks.csv') as taskfile:
-        reader = csv.DictReader(taskfile)
-        for row in reader:
-                if (datetime.datetime.strptime(row['date'], '%m/%d/%Y') == search_mode):
-                    search_results.append(row)
-                    print(search_results)                    
-                else:
-                    clear_screen()
-                    print("{} was not found.".format(search_mode)) 
-                    return_menu = input("\nEnter r to return to search menu: ")
-                if return_menu == 'r':
-                    clear_screen()
-                    search_entries()
-                    
                                                
 
 def search_range():
@@ -290,4 +270,3 @@ def time_search():
 
 if __name__ == "__main__":
     work_log()
- 
