@@ -3,6 +3,7 @@ import sys
 import csv
 import os
 import re
+import json
 
 def clear_screen():
     # Clears the screen after user enters the option that they would like to select
@@ -130,8 +131,7 @@ def search_entries():
     else:
         print("Please enter a, b, c, d or e.")
     
-    
-    
+        
 
         
 def input_date(date):
@@ -189,7 +189,7 @@ def search_range():
         print('\nNo results found.\n')
         search_entries()
     else:
-        print(search_results)     
+        print(json.dumps(search_results))   
 
 
 def exact_search():
@@ -212,7 +212,7 @@ def exact_search():
         print("That keyword was not found")
         search_entries()
     else:
-        print(search_results)
+        print(json.dumps(search_results))
         
                     
 
@@ -240,7 +240,7 @@ def regex_search():
         print("\nNo results found!")
         search_entries()
     else:
-        print(search_results)
+        print(json.dumps(search_results))
         
 def time_search():
     time_results = None
@@ -264,7 +264,7 @@ def time_search():
             print("No results found")
             search_entries()
         else:
-            print(search_results)
+            print(json.dumps(search_results))
 
 
 
