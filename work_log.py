@@ -82,7 +82,6 @@ def new_entry():
         elif final_input.lower() == 'r':
             work_log()
             
-            
 
 def delete_entry():
     # Deletes entry
@@ -132,9 +131,7 @@ def search_entries():
     else:
         print("Please enter a, b, c, d or e.")
     
-        
-
-        
+     
 def input_date(date):
     while len(date) == 0:
         try:
@@ -144,8 +141,6 @@ def input_date(date):
         except ValueError:
             print('That is not the correct format, format must be in MM/DD/YYYY. Please try again.')
 
-            
-                                               
 
 def search_range():
     # Allows users to search for a certain date or a range of dates.
@@ -198,7 +193,6 @@ def search_range():
             print("Notes: {} ".format(item.get('notes')))
             print('')
             
-
 
 def exact_search():
     # Searches by exact keyword
